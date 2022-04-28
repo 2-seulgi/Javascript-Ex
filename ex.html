@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="black-bg">
+      <div class="white-bg">
+        <h4>로그인하세요</h4>
+        <form action="success.html">
+          <div class="my-3">
+            <input type="text" class="form-control" id="id" />
+          </div>
+          <div class="my-3">
+            <input type="password" class="form-control" id="pw" />
+          </div>
+          <button type="submit" class="btn btn-success" id="send">전송</button>
+          <button class="btn btn-success" id="close">닫기</button>
+        </form>
+      </div>
+    </div>
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <span class="navbar-brand">Navbar</span>
+        <span class="badge ms-auto mx-3 bgDark">Dark</span>
+        <button class="navbar-toggler" type="button">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
+    <ul class="list-group" id="test1">
+      <li class="list-group-item">An item</li>
+      <li class="list-group-item">A second item</li>
+      <li class="list-group-item">A third item</li>
+      <li class="list-group-item">A fourth item</li>
+      <li class="list-group-item">And a fifth one</li>
+    </ul>
+    <div class="main-bg">
+      <h4 style="color: #428c68">Plant on Sale</h4>
+      <button type="button" id="login" class="btn btn-success">로그인</button>
+    </div>
+    <div class="alert alert-success"><span id="num">5</span>초 이내 구매시 사은품 증정!</div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script>
+      $('#login').on('click', function () {
+        $('.black-bg').addClass('show-modal');
+      });
+      $('#close').on('click', function () {
+        $('.black-bg').removeClass('show-modal');
+      });
+      $('#send').on('click', function (e) {
+        if ($('#id').val() == '') {
+          e.preventDefault();
+          alert('아이디를 입력하세요');
+        }
+        if ($('pw').val() == '') {
+          e.preventDefault();
+          alert('비밀번호를 입력하세요');
+        }
+        if ($('#pw').val().length < 6) {
+          e.preventDefault();
+          alert('비밀번호를 6자리 이상 입력하세요');
+        }
+      });
+      let count = 0;
+      $('.badge').on('click', function () {
+        count = count + 1;
+        if (count % 2 == 1) {
+          $('.badge').text('light');
+          $('.badge').removeClass('bgDark');
+        } else if (count % 2 == 0) {
+          $('.badge').text('dark');
+          $('.badge').addClass('bgDark');
+        }
+      });
+      document.getElementById('id').addEventListener('input', function () {
+        if (getElementById('pw').value.length < 6) {
+        }
+      });
+
+      let timeCount = 5;
+      setInterval(() => {
+        timeCount -= 1;
+        if (timeCount >= 0) {
+          document.querySelector('#num').innerHTML = timeCount;
+        }
+      }, 1000);
+      setTimeout(() => {
+        $('.alert').hide();
+      }, 6000);
+
+      // (참고) 타이머를 삭제하고 싶으면
+      // var 타이머 = setInterval(어쩌구);
+      // 이렇게 변수에 저장해둔 다음
+      // 타이머 삭제하고 싶을 때 clearTimeout(타이머) 이 코드 실행하면 됩니다.
+
+      // 쿼리셀렉터-class 이용한 선택
+      //   document.querySelector('.list-group');
+      // 쿼리셀렉터-id 이용한 선택
+      //   document.querySelector('#test1');
+      // 다만 쿼리셀랙터는 맨 위 하나만 찾아주기 때문에 querySelectorAll을 사용한다. 대신 인덱싱 필요
+
+      //   document.getElementsByClassName('navbar-toggler')[0].addEventListener('click', function () {
+      //     document.getElementsByClassName('list-group')[0].classList.toggle('show');
+      //   });
+
+      // document.querySelectorAll('.navbar-toggler')[0].addEventListener('click', function () {
+      //   document.querySelectorAll('.list-group')[0].classList.toggle('show');
+      // });
+
+      //  jquery 로 변경
+      $('.navbar-toggler').on('click', function () {
+        document.querySelectorAll('.list-group').classList.toggle('show');
+      });
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

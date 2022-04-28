@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="alert-box" id="alter">
+      <p>
+        UI 만드는 법칙<br />
+        1. HTML CSS 로 미리 UI 디자인을 해놓고 필요하면 평소엔 숨김 2. 버튼을 누르거나할 경우 UI를 보여달라고
+        자바스크립트 코드짬
+      </p>
+      <button id="close">닫기</button>
+    </div>
+    <button onclick="alterUI('block')">UI만드는법</button>
+
+    <div class="alert-box" id="alterBox">
+      <p id="title">연습연습😅</p>
+      <button onclick="alter('none')">닫기</button>
+    </div>
+    <button onclick="alter('block','아이디를 입력해주세요');">버튼2</button>
+    <button onclick="alter('block','비밀번호를 입력해주세요');">버튼3</button>
+
+    <script>
+      // html 문서.(의)요소를 겟 해주세요 아이디가 hello인. 그것의 내부html은 안녕으로 바꿔줘
+      //= 오른쪽을 왼쪽에 넣는것
+      //   document.getElementById('hello').innerHTML = '안녕';
+
+      function alterUI(setAlter) {
+        document.getElementsByClassName('alert-box')[0].style.display = setAlter;
+      }
+
+      function alter(setAlter, setTitle) {
+        document.getElementById('alterBox').style.display = setAlter;
+        document.getElementById('title').innerHTML = setTitle;
+      }
+
+      document.getElementById('close').addEventListener('click', function () {
+        document.getElementById('alter').style.display = 'none';
+      });
+      // Event: 클릭(click), 키입력(keydown), 스크롤(scroll), 드래그(drag) 마우스오버(mouseover) 기능
+      // 함수 파라미터 자리에 들어가는 funtion(){} : 콜백 함수 -> 순차적 실핼할때 요구함
+
+    </script>
+  </body>
+</html>
+<!-- UI 만드는 법칙
+1. HTML CSS 로 미리 UI 디자인을 해놓고 필요하면 평소엔 숨김
+
+2. 버튼을 누르거나할 경우 UI를 보여달라고 자바스크립트 코드짬
+
+이게 다임  -->
