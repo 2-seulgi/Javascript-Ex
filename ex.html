@@ -24,6 +24,13 @@
           <div class="my-3">
             <input type="password" class="form-control" id="pw" />
           </div>
+          <div class="lorem" style="width: 500px; height: 100px; overflow-y: scroll">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae voluptas voluptatum minus praesentium fugit
+            debitis at, laborum ipsa itaque placeat sit, excepturi eius. Nostrum perspiciatis, eligendi quae consectetur
+            praesentium exercitationem. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae voluptas
+            voluptatum minus praesentium fugit debitis at, laborum ipsa itaque placeat sit, excepturi eius. Nostrum
+            perspiciatis, eligendi quae consectetur praesentium exercitationem.
+          </div>
           <button type="submit" class="btn btn-success" id="send">전송</button>
           <button class="btn btn-success" id="close">닫기</button>
         </form>
@@ -31,7 +38,7 @@
     </div>
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
-        <span class="navbar-brand">Navbar</span>
+        <span class="navbar-brand" id="brand">Navbar</span>
         <span class="badge ms-auto mx-3 bgDark">Dark</span>
         <button class="navbar-toggler" type="button">
           <span class="navbar-toggler-icon"></span>
@@ -48,8 +55,21 @@
     <div class="main-bg">
       <h4 style="color: #428c68">Plant on Sale</h4>
       <button type="button" id="login" class="btn btn-success">로그인</button>
+      <div class="alert alert-success"><span id="num">5</span>초 이내 구매시 사은품 증정!</div>
     </div>
-    <div class="alert alert-success"><span id="num">5</span>초 이내 구매시 사은품 증정!</div>
+    <div style="overflow: hidden">
+      <div class="slide-container">
+        <div class="slide-box"><img src="car1.png" /></div>
+        <div class="slide-box"><img src="car2.png" /></div>
+        <div class="slide-box"><img src="car3.png" /></div>
+      </div>
+    </div>
+    <button class="previous">이전</button>
+    <button class="slide-1">1</button>
+    <button class="slide-2">2</button>
+    <button class="slide-3">3</button>
+    <button class="next">다음</button>
+    <div style="height: 1000px"></div>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
@@ -62,7 +82,8 @@
       $('#login').on('click', function () {
         $('.black-bg').addClass('show-modal');
       });
-      $('#close').on('click', function () {
+      $('#close').on('click', function (e) {
+        e.preventDefault();
         $('.black-bg').removeClass('show-modal');
       });
 
@@ -105,11 +126,66 @@
           $('.badge').addClass('bgDark');
         }
       });
-      document.getElementById('id').addEventListener('input', function () {
-        if (getElementById('pw').value.length < 6) {
+      // 캐러셀
+      $('.slide-1').on('click', function () {
+        $('.slide-container').css('transform', 'translateX(0vw)');
+      });
+      $('.slide-2').on('click', function () {
+        $('.slide-container').css('transform', 'translateX(-100vw)');
+      });
+      $('.slide-3').on('click', function () {
+        $('.slide-container').css('transform', 'translateX(-200vw)');
+      });
+      // 다음 버튼 누르면, 지금 보이는 사진이 1이면 2로, 2면 3으로, 3이면 1로
+      let image = 1;
+      $('.next').on('click', function () {
+        $('.slide-container').css('transform', 'translateX(-' + image + '00vw)');
+        image += 1;
+      });
+      // let image2 = 3;
+      // $('.previous').on('click', function () {
+      //   if (image2 == 3) {
+      //     $('.slide-container').css('transform', 'translateX(-100vw)');
+      //     image -= 1;
+      //   } else if (image2 == 2) {
+      //     $('.slide-container').css('transform', 'translateX(-100vw)');
+      //     image -= 1;
+      //   }
+      // });
+      // document.getElementById('id').addEventListener('input', function () {
+      //   if (getElementById('pw').value.length < 6) {
+      //   }
+      // });
+
+      // 스크롤 이벤트 - 헤더 글씨 변경
+      // $(window).on('scroll', function () {
+      //   if (window.scrollY > 100) {
+      //     $('.navbar-brand').css('font-size', '20px');
+      //   }
+      // });
+      window.addEventListener('scroll', function () {
+        if (window.scrollY > 100) {
+          document.getElementById('brand').style.fontSize = '20px';
+        } else if (window.screenY < 100) {
+          document.getElementById('brand').style.fontSize = '30px';
+        }
+      });
+      // 스크롤 이벤트 - 박스 끝까지 스크롤시 알림
+      window.addEventListener('scroll', function () {
+        let scroll = document.querySelector('.lorem').scrollTop;
+        let scrolleHeight = document.querySelector('.lorem').scrollHeight;
+        let height = document.querySelector('.lorem').clientHeight;
+        if (scroll + height > scrolleHeight - 30) {
+          alert('다읽음');
         }
       });
 
+      // 현재 웹페이지 높이
+      document.querySelector('html').scrollHeight;
+      document.querySelector('html').clientHeight;
+      window.scrollY;
+
+      // 사라지는 div 박스
       let timeCount = 5;
       setInterval(() => {
         timeCount -= 1;

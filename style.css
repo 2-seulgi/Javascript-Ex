@@ -61,7 +61,27 @@ button {
   background-color: #d5f2d3;
   color: #428c68;
 }
-.bgDark{
-  background-color:#428c68 ;
+.bgDark {
+  background-color: #428c68;
   color: #d5f2d3;
+}
+.slide-container {
+  width: 300vw;
+  transition: all 1s;
+}
+.slide-box {
+  width: 100vw;
+  float: left;
+}
+.slide-box img {
+  width: 100%;
+}
+.navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 5;
+}
+.navbar-brand {
+  font-size: 30px;
+  transition: all 1s;
 }
