@@ -79,6 +79,19 @@
     ></script>
 
     <script>
+      // 모달창의 검은 배경 누르면 꺼지게
+      // 문제 어떤걸 눌러도 다 닫힌다. ->이벤트 버블링
+      // 이벤트 리스너 콜백 함수에 파라미터를 추가하면 이벤트 관련 유용한 함수를 사용 가능하다. 보통 'e'라고 하는것이 이것
+      // e.target 은 실제 클릭한 요소(이벤트 발생한곳)를 알려주고 e.currentTarget은 지금 이벤트리스터가 달린곳을 알려준다. (this로 사용)
+      // e.preventDefault() 실행하면 이벤트 기본 동작을 막아주고, e.stopPropagation() 실행하면 내 상위요소로의 이벤트 버블링을 중단해줌
+
+      document.querySelector('.black-bg').addEventListener('click', function (e) {
+        // console.log(e.target);
+        // console.log(document.querySelector('.black-bg'));
+        if (e.target == document.querySelector('.black-bg')) {
+          document.querySelector('.black-bg').classList.remove('show-modal');
+        }
+      });
       $('#login').on('click', function () {
         $('.black-bg').addClass('show-modal');
       });
